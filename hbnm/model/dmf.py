@@ -1,10 +1,10 @@
 #!/usr/bin/python
 
 """ Dynamic mean field model base class."""
-from utils import cov_to_corr
-from utils import load_model_params
-from hemo import Balloon
-from sim import Sim
+from .utils import cov_to_corr
+from .utils import load_model_params
+from .hemo import Balloon
+from .sim import Sim
 
 from scipy.optimize import fsolve
 from scipy.linalg import solve_lyapunov, eig
@@ -406,7 +406,7 @@ class Model(object):
         #synaptic_state[:, :, 0] = self.state
 
         if self._verbose:
-            print "Beginning simulation."
+            print("Beginning simulation.")
 
         self.delays = delays
         if self.delays:
@@ -449,7 +449,7 @@ class Model(object):
 
             # Update state variables
             if not (i % n_save):
-                i_save = i / n_save
+                i_save = int(i / n_save)
                 if not save_mem:
                     synaptic_state[:, :, i_save] = self.state
 
@@ -463,10 +463,10 @@ class Model(object):
 
                 if self._verbose:
                     if not (i_save % 1000):
-                        print i_save
+                        print(i_save)
 
         if self._verbose:
-            print "Simulation complete."
+            print("Simulation complete.")
 
         self.sim.t = t
         self.sim.dt = dt_save
@@ -609,7 +609,7 @@ class Model(object):
         if builtin:
             return solve_lyapunov(jacobian, -Q)
         else:
-            n = jacobian.shape[0] / self._nc
+            n = int(jacobian.shape[0] / self._nc)
             evals_cc = np.conj(evals)
             Q = spr.csc_matrix(Q)
 
@@ -650,7 +650,7 @@ class Model(object):
         """
 
         if self._unstable:
-            if self._verbose: print "System unstable - no solution to Lyapunov equation - exiting"
+            if self._verbose: print("System unstable - no solution to Lyapunov equation - exiting")
             self._cov, self._cov_bold, self._corr_bold, self._corr = None, None, None, None
             return
         else:

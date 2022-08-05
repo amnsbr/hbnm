@@ -4,7 +4,7 @@ from hbnm.io import Data
 from hbnm.bnm import Bnm
 from hbnm.model.utils import subdiag, fisher_z
 from scipy.spatial.distance import squareform
-from optimization import load_data
+from .optimization import load_data
 
 def matrix_plot(ax, x, cmap):
     ax.pcolormesh(x, cmap=cmap, vmin=0.0, vmax=1.0)
@@ -60,7 +60,7 @@ heterogeneous.set('G', theta_heterogeneous[4,0])
 heterogeneous.moments_method()
 
 from scipy.stats import pearsonr
-print pearsonr(subdiag(fc_obj), subdiag(heterogeneous.get('corr_bold')))
+print(pearsonr(subdiag(fc_obj), subdiag(heterogeneous.get('corr_bold'))))
 
 """
 Plot

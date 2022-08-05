@@ -4,9 +4,9 @@
 system via Euler integration. Also includes hemodynamic
 response functionality. """
 
-import cPickle as pickle
+import pickle
 import numpy as np
-from utils import cov_to_corr
+from .utils import cov_to_corr
 from os.path import exists
 
 
@@ -62,7 +62,7 @@ class Sim(object):
             sim_dict = pickle.load(open(sim_file, "rb"))
             for key, attr in sim_dict.items():
                 self.__setattr__(key, attr)
-            print "Simulation loaded."
+            print("Simulation loaded.")
 
         return
 

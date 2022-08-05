@@ -3,7 +3,7 @@ import sys
 from hbnm.io import Data
 from hbnm.model.utils import subdiag, fisher_z
 from scipy.stats import pearsonr
-from optimization import load_data
+from .optimization import load_data
 
 if __name__ == '__main__':
     """
